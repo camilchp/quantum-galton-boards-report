@@ -1,0 +1,210 @@
+\documentclass{article}
+
+\input{packages_and_notations}
+\addbibresource{sources.bib}
+
+\title{Internship Report}
+
+\author{Camil Champin, supervised by Alonso Botero Mejia}
+
+\begin{document}
+
+\maketitle
+
+\section{Interferometers and unitaries}
+
+\input{interferometers_and_unitaries}
+
+\section{Symmetries in the Fourrier transform}
+
+\input{symmetries_of_ufou}
+
+\section{Studying  the symmetries}
+
+\input{studying_symmetries}
+
+\section{Asymptotics of bosonic amplitudes for compatible histograms}
+
+In this part $U$ is an arbitrary unitary. We consider vectors of amplitudes $\vec{\nu}$ and phases $\vec{\phi}$ in $\mathbb{R}^{m}$ such that the following quantum state is well defined:
+
+\[\ket{\psiVec{\nu}{\phi}} = \sum_{i = 1}^{m} \sqrt{\nu_{i}} e^{\phi_{i}} \ket{i} \]
+
+\begin{definition}[Compatibility]
+  We say that $\vec{\nu}, $ and $\vec{\nu'}$ are compatible under the unitary $U$ if there exists $\vec{\phi}$ and $\vec{\phi'}$ such that:
+
+  \[\ket{\psiVec{\nu'}{\phi'}} = U \ket{\psiVec{\nu}{\phi}}\]
+\end{definition}\illustration{3D example with cones}
+
+Note that this is equivalent to:
+
+\[\Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}} = 1\]
+
+\begin{prop}
+  The fock state $\ket{\vec{n}}$ can have the following formula for any arbirtary $\vec{\nu}$:
+  \[\ket{\vec{n}} = c \int \frac{d^{m}\vec{\phi}}{(2\pi)^{m}} e^{-i \vec{\phi} \cdot \vec{n}} \ket{\psiVec{\nu}{\phi}}^{\otimes n}\]
+where:
+
+\[c_{\vec{\nu},\vec{n}} := \frac{1}{\prod_{i} \sqrt{\nu_{i}}^{n_{i}} \sqrt{\frac{n!}{\prod_{i} n_{i}}}} \]
+\end{prop}
+
+Note that when $\nu_{i} = \frac{n_i}{n}$, Stirling's formula ensures that $c$ decreases polynomially in $n$.\change{add proof somewhere}
+
+From now on we will consider two compatible histograms:
+
+\[\begin{cases}
+    \vec{n} = n \cdot \vec{\nu} \\
+    \vec{n'} = n \cdot \vec{\nu'}
+  \end{cases}\]
+
+We denote:
+
+\[\Ampl{\vec{n}}{\vec{n'}} = \frac{\bra{\vec{n'}} U \ket{\vec{n}}}{c_{\vec{n}, \vec{\nu}} c_{\vec{n}, \vec{\nu}}}\]
+
+We then have:
+
+\[\Ampl{\vec{n}}{\vec{n'}} =  \int \frac{d^{m}\vec{\phi}}{{(2\pi)}^{m}} \frac{d^{m}\vec{\phi'}}{{(2\pi)}^{m}} {\left[ \Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}} e^{-i \vec{\phi} \cdot \vec{\nu} + i \vec{\phi'} \cdot \vec{\nu'}} \right] }^{\otimes n} \]
+
+Since $\vec{\nu}$ and $\vec{\nu'}$ are compatible, there exists phase vectors for witch the bracket term will be of norm $1$, we will show that the amplitude will be dominated by those contributions.
+
+\subsection{Factoring out common phases}
+
+We notice that the integral is stable under phase vector translations. This motivates an attempt to equalise both first components of the two phase vectors.  We let:
+
+\[\undertilde{\vec{\phi}} = \begin{pmatrix}
+                              0 \\
+                              \phi_{2} - \phi_{1} \\
+                              \vdots \\
+                              \phi_{m} - \phi_{1}
+                            \end{pmatrix}
+                            ; \ \undertilde{\vec{\phi'}} = \begin{pmatrix}
+                              0 \\
+                              \phi'_{2} - \phi'_{1} \\
+                              \vdots \\
+                              \phi'_{m} - \phi'_{1}
+                            \end{pmatrix}
+                          \]
+
+Rewriting the bracket term in the amplitude integral gives us the following:\change{put this in an appendix}
+
+\input{phase_factoring}
+
+In the last line the first phase term is $1$ because the $\nu_{i}$'s sum to unity. Therefor:
+
+\[ \Ampl{\vec{n}}{\vec{n'}} =  \int \frac{d \phi_{1}}{2\pi} \frac{d \phi'_{1}}{2\pi} \int \frac{d^{m-1}\vec{\undertilde{\phi}}}{{(2\pi)}^{m-1}} \frac{d^{m-1}\vec{\undertilde{\phi'}}}{{(2\pi)}^{m-1}} {\left[ \Braket{\psiVec{\nu'}{\undertilde{\phi'}} | U | \psiVec{\nu}{\undertilde{\phi}}} e^{-i \vec{\undertilde{\phi}} \cdot \vec{\nu} + i \vec{\undertilde{\phi'}} \cdot \vec{\nu'}} \right] }^{\otimes n}  \]
+
+So dropping the tildes and assuming $\phi_{1} = \phi'_{1} = 0$ we have:
+
+\[ \Ampl{\vec{n}}{\vec{n'}} =  \int \frac{d^{m-1}\vec{\phi}}{{(2\pi)}^{m-1}} \frac{d^{m-1}\vec{\phi'}}{{(2\pi)}^{m-1}} {\left[ \Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}} e^{-i \vec{\phi} \cdot \vec{\nu} + i \vec{\phi'} \cdot \vec{\nu'}} \right] }^{\otimes n}  \]
+
+\subsection{Stationnary phase conditions}
+
+To obtain an approximation, we want to apply the stationary phase method. The idea is that for complex integrands whose phase rotates rapidly, the corresponding amplitudes will tend to cancel out. The main contribution then comes from the points where the phase shifts slowly. We show that this happens exactly at the points that realise compatibility for $\vec{\nu}$ and $\vec{\nu}$. Let us rewrite the amplitude:
+
+\[ \Ampl{\vec{n}}{\vec{n'}} =  \int \frac{d^{m-1}\vec{\phi}}{{(2\pi)}^{m-1}} \frac{d^{m-1}\vec{\phi'}}{{(2\pi)}^{m-1}} e^{n g(\vec{\phi}, \vec{\phi'})}  \]
+
+Where:
+
+\[g(\check{\phi}, \vec{\phi'}) := -i \vec{\phi} \cdot \vec{\nu} + i \vec{\phi'} \cdot \vec{\nu'} + \ln  \bra{\psi_{\vec{\nu'}\vec{\phi'}}} U \ket{\psiVec{\nu}{\phi}} \]
+
+Let us examin the conditions for $\nabla_{\phi} g = \nabla_{\phi'} g = 0$. We want to show that the phases that satisfy this are exactly the ones that realise compatibility. The reciprocal is quite obvious, one can verify it by looking at the expresssion for the derivatives in the following lines and replace the terms respecting compatibility. We show the direct implication:
+
+
+\begin{align*}
+  \nabla_{\phi} g = 0 &\\
+  &\implies -i \nu_{j} + \frac{i \Braket{\psiVec{\nu'}{\phi'} | U | j} \braket{j}{\psiVec{\nu}{\phi}}}{\Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}}} = 0 \; \; \; (\forall j > 1) \\
+  &\implies \Braket{\psiVec{\nu'}{\phi'} | U | j} = \Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}} \cdot \sqrt{\nu_{j}} e^{-i \phi_{j}}
+\end{align*}
+
+Doing the same for $\nabla_{\phi'} g$ we get the two conditions for all $j > 1$:
+
+\begin{empheq}[left = \empheqlbrace]{align}
+\Braket{\psiVec{\nu'}{\phi'} | U | j} &= \Lambda \sqrt{\nu_{j}} e^{i \phi_{j}}\label{stat:1} \\
+\Braket{j | U | \psiVec{\nu}{\phi}} &= \Lambda \sqrt{\nu'_{j}} e^{i \phi'_{j}}\label{stat:2}
+\end{empheq}
+
+where:
+\[\Lambda := \Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}}\]
+
+Now we need only show that whenever \ref{stat:1} and \ref{stat:2} are verified, then $|\Lambda| = 1$:
+
+\begin{align*}
+  \Lambda &= \sum_{j} \braket{\psiVec{\nu'}{\phi'}}{j} \Braket{j | U | \psiVec{\nu}{\phi}} \\
+  &= \sum_{j} \sqrt{\nu'_{j}} e^{-i \phi'^{j}} \Braket{j | U | \psiVec{\nu}{\phi}} \\
+          &\stackrel{\ref{stat:2}}{=} \sqrt{\nu'_{1}} \Braket{1 | U | \psiVec{\nu}{\phi}} + \sum_{j>1} \nu'_{j} \Lambda \\
+            &= \sqrt{\nu'_{1}} \Braket{1 | U | \psiVec{\nu}{\phi}} + \Lambda (1 - \nu'_{1}) \\
+  \implies \sqrt{\nu'_{1}}\Lambda &=  \Braket{1 | U | \psiVec{\nu}{\phi}}
+\end{align*}
+
+We can apply the same reasoning using \ref{stat:1} to obtain:
+
+\begin{empheq}[left = \empheqlbrace]{align*}
+\bra{\psiVec{\nu'}{\phi'}} U &= \Lambda \bra{\psiVec{\nu}{\phi}} \\
+U \ket{\psiVec{\nu}{\phi}} &= \Lambda \ket{\psiVec{\nu'}{\phi'}}
+\end{empheq}
+
+So $|\Lambda| = 1$.
+
+\subsection{Gaussian expansion}
+
+In this part we expand $g$ into its taylor series around these crytical points realising compatibility. We then plug the expansion into the amplitude integral to obtain an asymoptotic formula. We let the family of solutions be indexed by $\alpha$:
+
+\[\nabla_{\phi}g(\phi_{\alpha},\phi'_{\alpha}) = \nabla_{\phi'}g(\phi_{\alpha},\phi'_{\alpha}) = 0\]
+
+At the second order we get:
+
+\[g(\phi,\phi') = g_{\alpha} - \frac{1}{2} \vec{\delta}^{T} \Gamma_{\alpha} \vec{\delta} + O(\vec{\delta})\]
+
+\begin{empheq}[left = \empheqlbrace]{align*}
+g_{\alpha} &= \Braket{\psiVec{\nu}{\phi_{\alpha}} | U | \psiVec{\nu'}{\phi'_{\alpha}}} - \vec{\phi_{\alpha}} \cdot \vec{\nu} + \vec{\phi'_{\alpha}} \cdot \vec{\nu'} \\
+\vec{\delta} &= (\phi - \phi_{\alpha}, \phi' - \phi'_{\alpha})^{T} \\
+\Gamma_{\alpha} &= -\begin{pmatrix}
+\nabla_{\phi}\nabla_{\phi}g & \nabla_{\phi}\nabla_{\phi'}g \\
+\nabla_{\phi}\nabla_{\phi'}g & \nabla_{\phi'}\nabla_{\phi'}g
+\end{pmatrix}_{\alpha} \\
+\end{empheq}
+
+Then:
+
+\begin{align*}
+  \Ampl{\vec{n}}{\vec{n'}} &\sim \sum_{\alpha} \frac{e^{i n g_{\alpha}}}{(2 \pi)^{2(m-1)}} \int d \phi^{m-1} d \phi'^{m-1} e^{-\frac{n}{2} \vec{\delta}^{T} \Gamma_{\alpha} \vec{\delta}} \\
+  &\sim \sum_{\alpha} \frac{e^{in g_{\alpha}}}{(2 \pi)^{2(m-1)}} \frac{1}{\sqrt{\det(\Gamma_{\alpha})}}
+\end{align*}
+
+Now recall the normalisation term, to which we give an equivalent as $n \to \infty$ using Stirling's formula:
+
+\begin{align*}
+  c_{\vec{\nu}, \vec{n}} &= \frac{1}{\sqrt{\frac{n!}{\prod_{i} n_{i}!}} \prod_{i} \sqrt{\nu_{i}}^{n_{i}}} \\
+                           &= \sqrt{\frac{n^{n}}{n!} \prod_{i} \frac{n_{i}!}{n_{i}^{n_{i}}}}\\
+                         &\sim \sqrt{\frac{1}{\sqrt{2 \pi n}} \prod_{i} \sqrt{2 \pi n_{i}}} \\
+  &\sim (2 \pi n)^{\frac{m-1}{4}} \prod_{i} \nu_{i}^{\frac{1}{4}}
+\end{align*}
+
+Finally, taking into account both of the terms:\change{maybe cite equation}
+
+\begin{gather}
+  \Braket{\vec{n'} | U | \vec{n}} \sim \frac{1}{(2 \pi n)^{\frac{m-1}{2}}} \sum_{\alpha} \sqrt{\frac{\prod_{i} \sqrt{\nu_{i} \nu'_{i}}}{\det \Gamma_{\alpha}}} e^{i n g_{\alpha}}\label{asympt:1}
+\end{gather}
+
+\subsection{Closer look at the Hessian}
+
+Looking at the derivatives of $g$ one can get a formula for each coefficient of the Hessian:
+
+\begin{align*}
+  -\Gamma_{\phi_{i}, \phi_{j}} &= \frac{\partial^{2} g}{\partial \phi_{i} \partial \phi_{j}} \\
+  &= i \frac{\partial}{\partial \phi_{j}} \frac{\Braket{\psiVec{\nu'}{\phi'} | U \Pi_{i} | \psiVec{\nu}{\phi}}}{\Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}}} \\
+  &= -\delta_{i,j} \frac{\Braket{\psiVec{\nu'}{\phi'} | U \Pi_{i} | \psiVec{\nu}{\phi}}}{\Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}}} + \frac{\Braket{\psiVec{\nu'}{\phi'} | U \Pi_{i} | \psiVec{\nu}{\phi}} \Braket{\psiVec{\nu'}{\phi'} | U \Pi_{j} | \psiVec{\nu}{\phi}}}{\Braket{\psiVec{\nu'}{\phi'} | U | \psiVec{\nu}{\phi}}^{2}} \\
+&= -\delta_{i;j}\nu_{i} + \nu_{i}\nu_{j}
+\end{align*}
+
+Similar computations for the other indices give us the following set of formulas:
+
+\begin{empheq}[left = \empheqlbrace]{align*}
+-\Gamma_{\phi_{i}, \phi_{j}} &= -\delta_{i,j} \nu_{i} + \nu_{i} \nu_{j} \\
+-\Gamma_{\phi'_{i}, \phi'_{j}} &= -\delta_{i,j} \nu'_{i} + \nu'_{i} \nu'_{j} \\
+-\Gamma_{\phi'_{i}, \phi_{j}} &= U_{i,j} \sqrt{\nu'_{i} \nu_{j}} e^{\phi_{j} - \phi'_{i} - \Lambda} - \nu'_{i} \nu_{j}
+\end{empheq}
+
+\newpage
+\listoftodos[Notes]
+
+\end{document}

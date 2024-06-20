@@ -1,0 +1,57 @@
+% -------- Imports --------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools, amssymb, amsmath, amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{microtype}      % black magic that makes text look better
+\usepackage{stmaryrd}       % notation [| |]
+\usepackage{accents}        % notation like tilde under stuff
+\usepackage{hyperref}       % cool links
+\usepackage{empheq}         % align-like environments with braces and stuff
+\usepackage{caption}        % cool figure captions
+\usepackage{multicol}       % multi-columns
+\usepackage{biblatex}       % bibliography
+\usepackage{subcaption}     % ? can't remember ?
+\usetikzlibrary{quantikz}   % quantum circuits + notations
+\usepackage{braket}         % IMPORT AFTER QUANTIKZ better bracket notation
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes} % custom todo-notes
+
+% ---- Custom Environments -----
+
+% -- Statements
+\newtheorem{definition}{Proposition}
+\newtheorem{prop}{Proposition}
+
+% -- Todo notes
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\illustration}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=purple,backgroundcolor=purple!25,bordercolor=purple,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\usepackage{biblatex}
+
+% ------ Notations --------
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\hist}{Hist}
+\DeclareMathOperator{\comp}{Comp}
+\DeclareMathOperator{\weight}{W}
+\newcommand{\E}[2]{{{#1 + #2 - 1} \choose {#2}}}
+\newcommand{\psiVec}[2]{\psi_{\vec{#1},\vec{#2}}}
+\newcommand{\Ampl}[2]{\tilde{A}(#1,#2)}
+\newcommand{\Ufou}{U_{f}}
+
+\newcommand{\ketbra}[2]{\mathinner{|{#1}\rangle \! \langle{#2}|}}
+\newcommand{\braKet}[3]{\bra{#1} #2 \ket{#3}}

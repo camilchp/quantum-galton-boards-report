@@ -1,0 +1,93 @@
+\section{Studying  the histogram orbits}
+
+We've seen that the action of $D_{m}$ results in many simmetries in the fourrier transform of the histograms. Studying the corresponding permutation representation, we can analyse the situation deeper.
+
+\subsection{Charcaters of our permutation representation of $D_{m}$}
+
+The histograms $\hist_{N,m}$ correspond to Fock basis states for $N$ particles and $m$ ports, and induce $(V^{\hist_{N,m}},\rho)$ the permutation representation of $D_{m}$ on $\hist_{N,m}$. Let us compute its character $\chi$. Every matrix being a permutation matrix, its trace is the sum of the $1$'s on the diagonal, i.e.\ the number of fixed points of the corresponding permutation. The group $D_{m}$ has known conjugacy classes \cite{dirreps}, we compute the character for each one.
+
+\paragraph{$\chi(r^{k})$:} Let $g = k \wedge m$ and $m = gq$. We count the histograms that verify:
+
+\[\forall i \in \mathbb{Z}_{m}: n_{i} = n_{i+k}\]\illustration{example on unit circle}
+
+There are $g$ orbits of size $q$, which must each be populated by a given value. These values when multiplied by $q$ must therefor equal $n$. So if $q \nmid n$ there are $0$ possibilities. If $lq = n$ there are $\E{g}{l}$ possibilities.
+
+% \paragraph{$\chi(r)$:} We need $(n_0, n_1,\cdots, n_{m-1}) = (n_{m-1}, n_0, \cdots, n_{m-2})$:
+
+% \[\forall i \in \mathbb{Z}_{m}: n_{i} = n_{i+1}\]
+
+% This leads to $n_0 = \cdots = n_{m-1}$, a uniform histogram only possible if $m | n$, in which case there is $1$ possibility. Otherwise there are $0$.
+
+\paragraph{$\chi(s)$:}
+
+We are essentially counting the palindromes within $\hist_{N,m}$. Depending on wether $m$ is even or odd, the histogram must be in two symmetric parts with or without an extra central value.
+
+
+\begin{itemize}
+\item \textbf{For $m$ even and $n$ odd} palindromes are impossible because the two parts of the histogram must have the same sum.
+\item \textbf{For $m = 2\tilde{m}$ and $N = 2\tilde{N}$} we have any choice for the first half of the histogram and that choice determines the second so there are $\E{\tilde{m}}{\tilde{n}}$.
+\item \textbf{For $m = 2\tilde{m} + 1$ and $N = 2\tilde{N}$} we have any even choice for the middle value $i$ and any remaining choice for the first half: $\sum_{i=0}^{\tilde{n}} \E{\tilde{m}}{\tilde{n} - i} = \frac{\tilde{m} + \tilde{n}}{\tilde{n}} \E{\tilde{m}}{\tilde{n}}$.
+\item \textbf{For $m = 2\tilde{m} + 1$ and $N = 2\tilde{N} + 1$} the situation is the same, this time $i$ must be odd to cancel out the extra particle: $\sum_{i=0}^{\tilde{n}} \E{\tilde{m}}{\tilde{n} - i} = \frac{\tilde{m} + \tilde{n}}{\tilde{n}} \E{\tilde{m}}{\tilde{n}}$.
+\end{itemize}
+
+Finally when $m$ is even we also need to consider the class $sr$:
+
+\paragraph{$\chi(sr)$:} We want $(n_0,n_1,\cdots,n_{m-1}) = (n_{m-2},\cdots, n_{0}, n_{m-1})$, i.e.\ the last value $n_{m-1} = i$ is conserved and the rest must be a palindrome of odd size, and of sum (n-i).
+
+\[\sum_{i=0}^{n} =\]\unsure{calculate this}
+
+\subsection{Decomposing into irreducible representations}
+
+The character table of $D_{m}$ depends on the parity of $m$:
+
+\begin{table}
+  \begin{subtable}{0.5\linewidth}
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{||c | c c c c c||}
+  \hline
+  \multicolumn{6}{|c|}{$D_{m}$ (odd)} \\
+  \hline
+  conjugacy class   & $r^0$ & $r^1$ & $\cdots$ & $r^{\tilde{m}}$    & $s$ \\
+  multiplicity      & 1     & 2     & 2        & 2                & $m$ \\
+\hline \hline
+  $\chi_{1,1}$       & 1     & 1     & $\cdots$ & 1                & 1 \\
+  $\chi_{1,2}$       & 1     & 1     & $\cdots$ & 1                & (-1) \\
+  $\chi_{2,k}$       & 2          & $2 \cos(\frac{2 k \pi}{m})$ & $\cdots$ & $2 \cos(\frac{2 k \tilde{m} \pi}{m})$ & 0 \\
+\hline
+    \end{tabular}
+}
+
+  \end{subtable}
+  \begin{subtable}{0.6\linewidth}
+
+    \resizebox{\linewidth}{!}{%
+    \begin{tabular}{||c | c c c c c c||}
+  \hline
+  \multicolumn{7}{|c|}{$D_{m}$ (even)} \\
+  \hline
+  conjugacy class   & $r^0$     & $r^1$             & $\cdots$    & $r^{\tilde{m}}$      & $s$         & $sr$\\
+  multiplicity      & 1         & 2                 & 2           & 1                  & $\tilde{m}$ & $\tilde{m}$\\
+\hline \hline
+  $\chi_{1,1}$       & 1         & 1                 & $\cdots$    & 1                 & 1             & 1 \\
+  $\chi_{1,2}$       & 1         & (-1)              & $\cdots$    & ${(-1)}^{\tilde{m}}$  & 1             & (-1)\\
+  $\chi_{1,3}$       & 1         & 1                 & $\cdots$    & 1                 & (-1)          & (-1) \\
+  $\chi_{1,4}$       & 1         & (-1)              & $\cdots$    & ${(-1)}^{\tilde{m}}$  & (-1)          & 1\\
+  $\chi_{2,k}$       & 2         & $2 \cos(\frac{2 k \pi}{m})$ & $\cdots$ & $2 \cos(\frac{2 k \tilde{m} \pi}{m})$ & 0 & 0\\
+\hline
+    \end{tabular}
+}
+  \end{subtable}
+\end{table}
+
+\subsection{Decomposing translationally invariant unitaries}
+
+Let us consider a translationally invariant unitary $U$, that is $U$ has eigenvectors:
+
+\[U \ket{n_{\theta}} = e^{i\phi(\theta)} \ket{\theta}\]
+
+Then we can use the following decomposition:
+
+\begin{align*}
+  \bra{\vec{x}} U \ket{\vec{y}} &= \sum_{\theta}\braket{\vec{x}}{\vec{n_{\theta}}} U \braket{\vec{n_{\theta}}}{\vec{y}}  \\
+   &= \sum_{\theta}\braket{\vec{x}}{\vec{n_{\theta}}} \braket{\vec{n_{\theta}}}{\vec{y}} e^{i \phi(\theta)}
+\end{align*}

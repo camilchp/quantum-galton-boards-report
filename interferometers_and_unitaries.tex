@@ -1,0 +1,26 @@
+
+\subsection{Fock basis and symmetrisation}
+
+The basic setup for boson sampling is the following: we have an interferometer that behaves like a unitary $U$ over $m$ entry ports and $m$ output ports. We then send $N$ photons through this setup, starting with any input histogram. The output is a superposition of output histograms.\illustration{m-port interferometer}
+
+The photons we send through the device are non-interacting indistinguishable bosons, let us describe the formalism using examples with $m=N=2$. First we consider the computational basis for a single photon: $\ket{1}$ and $\ket{2}$ describe the particle being in either port. If the photons were distinguishable, we could then have any state in the compound space spanned by:
+
+\[\ket{1} \otimes \ket{1} \;  ; \; \ket{1} \otimes \ket{2} \; ; \; \ket{2} \otimes \ket{1}  \; ; \; \ket{2} \otimes \ket{2}\]
+
+We apply what is called second symmetrisation, which means we restrict ourselves to states that are invariant under permutation of the particles (This corresponds to the particles being ``indistinguishable'' in the sense that we don't know which is which, we only know how many there are in each port). A useful basis for these states is the Fock basis which has a nice interpretation: there are $m$ digits and each corresponds to the occupation of a port:\improvement{reference material}
+
+\[\ket{2,0}_{\mathcal{F}} = \ket{1} \otimes \ket{1} \; ; \; \ket{1,1}_{\mathcal{F}} = \frac{\ket{1} \otimes \ket{2} + \ket{2} \otimes \ket{1}}{\sqrt{2}} \; ; \; \ket{0,2}_{\mathcal{F}} =  \ket{2} \otimes \ket{2}\]
+
+We can see that the Fock basis vectors read just like a histogram. Jumping back to the general case, we drop the $\mathcal{F}$ and notate:
+
+\[\ket{n_{1},\cdots,n_{m}} = \sum_{\sigma \in \mathfrak{S}\{n_{1},\cdots,n_{m}\}} \frac{\ket{\sigma(n_1)} \otimes \cdots \otimes \ket{\sigma(n_m)}}{\sqrt{| \mathfrak{S}\{n_{1},\cdots,n_{m}\}|}}\]
+
+\subsection{Computing the output histograms}
+
+As previously mentioned, for a given input histogram $\vec{n} = (n_1, \cdots, n_{m})$ we will get a certain superposition of output histograms. A handy way to compute the amplitude of a given output $\vec{n'}$ is the following formula:\improvement{prove in appendix?}
+
+\begin{align}
+ \mathcal{A}_{U}(\vec{n'},\vec{n}) = \sqrt{\vec{n}! \vec{n'}!} \sum_{Q}^{*} \frac{U^{Q}}{Q!}\label{exp}
+\end{align}
+
+Where the factorials are over all the coefficients ($n_{1}! \cdot n_{2}! \cdots n_{m}!$), and similarly $U^{Q}$ denotes the product of $U_{i,j}^{Q_{i,j}}$'s. The star indicates that the sum is over \emph{all the matrices $Q$ whose lines sum to $\vec{n'}$ and whose columns sum to $\vec{n}$}. We also notate this $Q \in \comp(\vec{n}, \vec{n'})$. This exponential-like formula is useful in that it allows us to exploit simmetries between input and output histograms, as we will see in the following section.
