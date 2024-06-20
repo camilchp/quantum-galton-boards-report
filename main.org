@@ -1,6 +1,0 @@
-#+title: Quantum Galton Boards
-#+subtitle: Internship Report
-#+author: Camil Champin
-#+LATEX_HEADER: \input{packages}
-#+LATEX_CLASS: article
-#+options: toc:t
